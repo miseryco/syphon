@@ -1,0 +1,45 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-11-21T00:34:08.549Z",
+        "reason": "Design review: the three source captions have 15px of top padding beside their desktop rule. At 600px and below their border is removed."
+      },
+      {
+        "rule": "cream-palette",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-11-21T00:34:08.615Z",
+        "reason": "User confirmed the Henrietta booklet direction: warm paper was specified in the brief and the selected page uses #f6f1e6."
+      },
+      {
+        "rule": "cream-palette",
+        "value": "*",
+        "files": [
+          "privacy/index.html",
+          "support/index.html"
+        ],
+        "createdAt": "2026-11-21T00:43:28.689Z",
+        "reason": "The user selected the warm-paper Henrietta design for Syphon. Support and Privacy use the same #f6f1e6 paper as the landing page."
+      },
+      {
+        "rule": "cream-palette",
+        "value": "*",
+        "files": [
+          "download/index.html"
+        ],
+        "createdAt": "2026-11-21T00:45:08.103Z",
+        "reason": "The user chose the Henrietta booklet with warm paper. The download page uses the same #f6f1e6 as its cover."
+      }
+    ]
+  }
+}

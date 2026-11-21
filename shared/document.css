@@ -1,0 +1,25 @@
+.document .sheet { max-width: 60rem; }
+.document .wordmark { display: inline-flex; align-items: center; min-height: 44px; text-decoration: none; }
+.document .wordmark:hover { color: var(--rust); }
+.document-hero { padding-block: clamp(2.4rem, 5.2vw, 4.25rem) clamp(1.8rem, 4vw, 3rem); }
+.document-hero h1 { font-size: clamp(2.85rem, 6.5vw, 5.2rem); line-height: 1; letter-spacing: -.035em; }
+.document-hero p { max-width: 46ch; margin-top: 1rem; font-size: clamp(1.22rem, 2.1vw, 1.55rem); line-height: 1.38; text-wrap: pretty; }
+.document-hero time, .document-hero .contact-link { display: inline-block; margin-top: .85rem; font: 400 .95rem/1.4 system-ui, -apple-system, sans-serif; color: var(--muted); }
+.document-hero .contact-link { display: inline-flex; align-items: center; min-height: 44px; color: var(--rust); }
+.document-section { display: grid; grid-template-columns: minmax(0, .82fr) minmax(0, 1.65fr); gap: 6%; padding: 2.5rem 0; border-top: 1px solid var(--rule); scroll-margin-block-start: 1rem; }
+.document-section h2 { font-size: clamp(1.55rem, 2.5vw, 2.1rem); line-height: 1.12; letter-spacing: -.024em; text-wrap: balance; }
+.document-section p, .document-section ol { font: 400 1.03rem/1.58 system-ui, -apple-system, sans-serif; }
+.document-section p, .document-section li { text-wrap: pretty; }
+.document-section ol { margin: 0; padding-left: 1.35em; }
+.document-section li { padding-left: .15em; }
+.document-section li::marker { color: var(--rust); }
+.document-section li + li { margin-top: .45rem; }
+.document-section p + p, .document-section ol + p { margin-top: .8rem; }
+.document-section a { color: var(--rust); overflow-wrap: anywhere; }
+.document-section a:hover, .document-hero .contact-link:hover { color: var(--ink); }
+.document-section strong { font-weight: 600; }
+.document-section code { font: 500 .91em ui-monospace, SFMono-Regular, Menlo, monospace; overflow-wrap: anywhere; }
+@media (max-width: 680px) {
+  .document-section { grid-template-columns: minmax(0, 1fr); gap: .7rem; padding: 1.65rem 0; }
+  .document-section h2 { text-wrap: pretty; }
+}

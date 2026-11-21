@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f1e6">
+  <meta name="description" content="Turn a synth patch into a playable sampled instrument with Syphon for Mac. Capture named patches, velocity layers and round robins, then loop and map the samples.">
+  <title>Syphon — Sample any patch</title>
+  <link rel="icon" type="image/png" href="%BASE_URL%art/favicon.png">
+  <link rel="preload" href="./assets/fonts/henrietta.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="./shared/base.css">
+  <link rel="stylesheet" href="./booklet.css">
+  <script type="module" src="./shared/page.js"></script>
+</head>
+<body class="booklet">
+  <a href="#main" class="skip">Skip to content</a>
+  <div class="sheet">
+    <main id="main" tabindex="-1">
+      <div class="cover">
+        <div class="cover-type">
+          <h1>Sample any <span>patch</span></h1>
+          <p>Turn a favourite synth patch into a playable sampled instrument, down to the soft notes, the mod wheel and the way it sustains.</p>
+          <!-- include action -->
+        </div>
+        <div class="cover-object"><img src="%BASE_URL%art/syphon-light.webp" width="640" height="640" alt="Syphon’s light app icon, an S-shaped glass tube filled with amber." fetchpriority="high"></div>
+      </div>
+      <section class="sources" aria-labelledby="sources-title">
+        <div class="sources-heading">
+          <h2 id="sources-title">What’s on your desk?</h2>
+          <button type="button" class="motion-toggle" aria-label="Pause icon animations" hidden>Pause</button>
+        </div>
+        <div class="tabletop">
+          <figure class="specimen plugin">
+            <div class="object-space">
+              <div class="source-art">
+                <img src="%BASE_URL%art/plugin-light.webp" width="416" height="220" alt="A silver plug-in panel with two glass tubes of amber.">
+                <video data-loop="%BASE_URL%art/plugin-light.mp4" muted loop playsinline preload="none" aria-hidden="true"></video>
+              </div>
+            </div>
+            <figcaption><h3>Plugin</h3><p>Load an AU or VST3 instrument.</p></figcaption>
+          </figure>
+          <figure class="specimen midi">
+            <div class="object-space">
+              <div class="source-art">
+                <img src="%BASE_URL%art/midi-light.webp" width="332" height="312" alt="A coiled amber MIDI cable with a five-pin plug.">
+                <video data-loop="%BASE_URL%art/midi-light.mp4" muted loop playsinline preload="none" aria-hidden="true"></video>
+              </div>
+            </div>
+            <figcaption><h3>MIDI Device</h3><p>Send notes to your hardware synth and record the audio coming back.</p></figcaption>
+          </figure>
+          <figure class="specimen audio-file">
+            <div class="object-space">
+              <div class="source-art">
+                <img src="%BASE_URL%art/audio-light.webp" width="382" height="262" alt="Seven clear capsules filled with amber, arranged as a waveform.">
+                <video data-loop="%BASE_URL%art/audio-light.mp4" muted loop playsinline preload="none" aria-hidden="true"></video>
+              </div>
+            </div>
+            <figcaption><h3>Audio File</h3><p>Drop in a recording and play it across the keys.</p></figcaption>
+          </figure>
+        </div>
+      </section>
+      <!-- include features -->
+      <div class="closing-action">
+        <!-- include action -->
+      </div>
+    </main>
+    <!-- include footer -->
+  </div>
+  <!-- include dialogs -->
+</body>
+</html>

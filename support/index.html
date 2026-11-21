@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f1e6">
+  <meta name="description" content="Set up a Syphon capture, troubleshoot a plug-in or hardware synth, recover an unfinished run, or contact support.">
+  <title>Syphon support</title>
+  <link rel="icon" type="image/png" href="%BASE_URL%art/favicon.png">
+  <link rel="preload" href="../assets/fonts/henrietta.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../shared/base.css">
+  <link rel="stylesheet" href="../booklet.css">
+  <link rel="stylesheet" href="../shared/document.css">
+</head>
+<body class="booklet document">
+  <a href="#main" class="skip">Skip to content</a>
+  <div class="sheet">
+    <header class="masthead">
+      <a class="wordmark" href="%BASE_URL%" aria-label="Syphon home">Syphon</a>
+      <a class="features-link" href="%BASE_URL%privacy/">Privacy</a>
+    </header>
+    <main id="main" tabindex="-1">
+      <header class="document-hero">
+        <h1>Syphon support</h1>
+        <p>Start with one note. Once it sounds right in Preview, you can capture the rest of the keyboard.</p>
+        <a class="contact-link" href="#contact">Contact support</a>
+      </header>
+      <section class="document-section" id="first-capture" aria-labelledby="first-title">
+        <h2 id="first-title">Make your first instrument</h2>
+        <div>
+          <ol>
+            <li>Open Syphon on a Mac running macOS 14 or later. Click the source name in the title bar. Choose <strong>Plugin</strong> for an AU or VST3 instrument, <strong>MIDI Device</strong> for hardware, or <strong>Audio File</strong> for a recording.</li>
+            <li>Load your sound. Under <strong>Notes</strong>, choose the keys to sample. For a plug-in or hardware synth, set the velocities you want. Click <strong>Preview</strong> to hear a processed note.</li>
+            <li>In <strong>Output</strong>, choose a folder and format, then click <strong>Generate</strong>. When the capture finishes, <strong>Show in Finder</strong> opens the result.</li>
+          </ol>
+          <p>WAV and AIFF give you individual samples. For SFZ or Decent Sampler, keep the <code>.sfz</code> or <code>.dspreset</code> file beside its <code>Samples</code> folder when you move the instrument.</p>
+        </div>
+      </section>
+      <section class="document-section" id="plugins" aria-labelledby="plugins-title">
+        <h2 id="plugins-title">A plug-in is missing or silent</h2>
+        <div>
+          <p>In the plug-in picker, click <strong>Rescan</strong> after installing an instrument. Use <strong>Add VST3…</strong> for a VST3 you keep outside the usual plug-in folders.</p>
+          <p>If the instrument loads silently, open <strong>Show Editor</strong>, select a patch and try <strong>Audition</strong>. If Audition works but Preview is silent, open <strong>Settings → General</strong>, set <strong>Plugin rendering mode</strong> to <strong>Realtime compatibility</strong> and try Preview again.</p>
+        </div>
+      </section>
+      <section class="document-section" id="hardware" aria-labelledby="hardware-title">
+        <h2 id="hardware-title">My hardware synth is silent</h2>
+        <div>
+          <p>Syphon sends notes over MIDI and records the audio coming back. Set <strong>MIDI destination</strong> and the channel your synth listens on. Route the synth’s audio output to your interface, or select its USB audio input if it provides one.</p>
+          <p>Choose that <strong>Audio input</strong> and the matching <strong>Input channels</strong>. Play a note on the synth and check the input meter. For recording permission, click <strong>Allow Audio Input…</strong>. If access was denied, use <strong>Open Privacy Settings</strong> and enable Syphon under <strong>Privacy &amp; Security → Microphone</strong>.</p>
+        </div>
+      </section>
+      <section class="document-section" id="audio-file" aria-labelledby="file-title">
+        <h2 id="file-title">A recording plays in the wrong key</h2>
+        <p>In <strong>Audio File</strong>, set <strong>Original note</strong> to the pitch of the recording. Preview a different key to check it. Choose <strong>Modern</strong> to keep the duration, <strong>Varispeed</strong> to change speed with pitch, or <strong>Retro</strong> to adjust the grain size.</p>
+      </section>
+      <section class="document-section" id="sustain" aria-labelledby="sustain-title">
+        <h2 id="sustain-title">A held note cuts off</h2>
+        <p>Under <strong>Output → Processing</strong>, set <strong>Loop</strong> to <strong>Automatic</strong> and preview a sustained note. If Syphon finds a repeat, the waveform shows where it loops. Drag the handles to adjust it, then generate the instrument. For a slowly evolving synth patch, try a longer <strong>Hold</strong> to capture more of the sustain.</p>
+      </section>
+      <section class="document-section" id="unfinished-runs" aria-labelledby="runs-title">
+        <h2 id="runs-title">Recover an interrupted capture</h2>
+        <div>
+          <p>Open <strong>Unfinished Runs</strong> with the clock button in the title bar. Load the original plug-in and patch, reconnect the hardware, or make the original audio file available. <strong>Resume</strong> records the missing takes.</p>
+          <p>Use <strong>Export Partial…</strong> to save the takes you already have, or <strong>Discard</strong> to remove the temporary run. If every take was recorded before the interruption, choose <strong>Export</strong> to finish writing the instrument.</p>
+        </div>
+      </section>
+      <section class="document-section" id="remove" aria-labelledby="remove-title">
+        <h2 id="remove-title">Remove Syphon</h2>
+        <div>
+          <p>Finish or discard any unfinished runs, quit Syphon and move the app from Applications to the Trash.</p>
+          <p>To remove saved presets and working files too, choose <strong>Go → Go to Folder…</strong> in Finder and enter <code>~/Library/Application Support/</code>. Copy any presets you want to keep out of the <code>Syphon</code> folder, then move that folder to the Trash. Exports saved elsewhere stay where you put them.</p>
+        </div>
+      </section>
+      <section class="document-section" id="contact" tabindex="-1" aria-labelledby="contact-title">
+        <h2 id="contact-title">Contact support</h2>
+        <div>
+          <p>Email Misery &amp; Company at <a href="mailto:syphon@misery.co?subject=Syphon%20support">syphon@misery.co</a>. Include your macOS version, the version under <strong>Syphon → About Syphon</strong>, and the exact message or behaviour you saw.</p>
+          <p>Tell us which source you chose. For a plug-in, give its name and format (AU or VST3). For hardware, name your synth and audio interface.</p>
+        </div>
+      </section>
+    </main>
+    <!-- include footer -->
+  </div>
+</body>
+</html>

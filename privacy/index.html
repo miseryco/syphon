@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f1e6">
+  <meta name="description" content="How Syphon handles recordings, MIDI, plug-in permissions, saved presets and unfinished captures on your Mac.">
+  <title>Privacy policy — Syphon</title>
+  <link rel="icon" type="image/png" href="%BASE_URL%art/favicon.png">
+  <link rel="preload" href="../assets/fonts/henrietta.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../shared/base.css">
+  <link rel="stylesheet" href="../booklet.css">
+  <link rel="stylesheet" href="../shared/document.css">
+</head>
+<body class="booklet document">
+  <a href="#main" class="skip">Skip to content</a>
+  <div class="sheet">
+    <header class="masthead">
+      <a class="wordmark" href="%BASE_URL%" aria-label="Syphon home">Syphon</a>
+      <a class="features-link" href="%BASE_URL%support/">Support</a>
+    </header>
+    <main id="main" tabindex="-1">
+      <header class="document-hero">
+        <h1>Privacy policy</h1>
+        <p>Syphon captures and processes sound on your Mac. The app works without an account and includes no ads, tracking or usage analytics.</p>
+        <time datetime="2026-11-20">Updated November 20, 2026</time>
+      </header>
+      <section class="document-section" id="recordings" aria-labelledby="recordings-title">
+        <h2 id="recordings-title">Your recordings and exports</h2>
+        <p>Syphon reads the audio file or instrument you choose, processes the takes locally and writes the result to your chosen folder. Misery &amp; Company Ltd. receives no recordings, patch names or MIDI messages from the app. If you export to a shared drive or a cloud-synced folder, that folder’s sharing and sync settings apply.</p>
+      </section>
+      <section class="document-section" id="permissions" aria-labelledby="permissions-title">
+        <h2 id="permissions-title">MIDI and audio input</h2>
+        <p>In <strong>MIDI Device</strong> mode, Syphon sends notes and controller messages to the MIDI destination you select. It requests macOS <strong>Microphone</strong> permission to record the audio input you select, including inputs on USB interfaces. Plug-in capture and audio-file processing work without this permission. You can change it in <strong>System Settings → Privacy &amp; Security → Microphone</strong>.</p>
+      </section>
+      <section class="document-section" id="plugins" aria-labelledby="plugins-title">
+        <h2 id="plugins-title">Plug-ins and their libraries</h2>
+        <p>Syphon scans installed instruments and loads the AU or VST3 you choose in a helper process on your Mac. An instrument may need its own presets or sample libraries. macOS can ask on Syphon’s behalf for access to Documents, Downloads or an external or network drive. Any account, licensing or online service a third-party plug-in uses is covered by its developer’s privacy policy.</p>
+      </section>
+      <section class="document-section" id="storage" aria-labelledby="storage-title">
+        <h2 id="storage-title">What Syphon saves</h2>
+        <div>
+          <p>Syphon stores app preferences on your Mac. Its plug-in scan cache, saved presets and temporary runs live in <code>~/Library/Application Support/Syphon/</code>. A preset can remember note ranges, routing, the output folder and supported plug-in settings. It contains no audio recordings or sample libraries. You can delete individual presets in <strong>Settings → Presets</strong>.</p>
+          <p>While capturing, Syphon keeps temporary audio, source settings, file paths and a record of completed takes. After a full export, <strong>Done</strong> clears that run’s working files. You can resume or discard an interrupted or partially exported run in <a href="%BASE_URL%support/#unfinished-runs">Unfinished Runs</a>.</p>
+        </div>
+      </section>
+      <section class="document-section" id="website" aria-labelledby="website-title">
+        <h2 id="website-title">This website</h2>
+        <p>The site serves its own fonts, artwork and screenshots. It uses no analytics scripts, advertising pixels or cookies. GitHub Pages hosts the site and logs visitors’ IP addresses for security. <a href="https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages#data-collection">How GitHub Pages handles visitor data</a>.</p>
+      </section>
+      <section class="document-section" id="contact" aria-labelledby="contact-title">
+        <h2 id="contact-title">Privacy questions</h2>
+        <p>Email Misery &amp; Company Ltd. at <a href="mailto:syphon@misery.co?subject=Syphon%20privacy">syphon@misery.co</a>. When you email us, we receive your address, message and any attachments you choose to send so we can respond.</p>
+      </section>
+    </main>
+    <!-- include footer -->
+  </div>
+</body>
+</html>
