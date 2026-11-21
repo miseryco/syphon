@@ -8,19 +8,24 @@ from tempfile import TemporaryDirectory
 from PIL import Image, ImageChops, ImageOps
 
 site = Path(__file__).resolve().parents[1]
+loops = {'Plugin': ('plugin-swirl', 415), 'MIDI-Device': ('midi-swirl', 332),
+         'Audio-File': ('audio-swirl', 382)}
 parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument('--artwork', type=Path, default=site.parent / 'sample-syphon/artwork')
+parser.add_argument('--icon', choices=loops, action='append', help='refresh just this source (repeatable)')
+parser.add_argument('--frames', type=Path, help='reuse a light Frames directory rendered for the native app')
 parser.add_argument('--audio-frames', type=Path, help='reuse the light Audio File frames rendered for the app')
 args = parser.parse_args()
 artwork = args.artwork
 public = site / 'public'
 (public / 'art').mkdir(exist_ok=True)
 
-image = Image.open(artwork / 'syphon-final/Syphon-Light-1024.png').convert('RGBA')
-image = image.crop(image.getchannel('A').getbbox())
-image.thumbnail((640, 640), Image.Resampling.LANCZOS)
-image.save(public / 'art/syphon-light.webp', quality=94, method=6)
-image.resize((64, 64), Image.Resampling.LANCZOS).save(public / 'art/favicon.png')
+if not args.icon:
+    image = Image.open(artwork / 'syphon-final/Syphon-Light-1024.png').convert('RGBA')
+    image = image.crop(image.getchannel('A').getbbox())
+    image.thumbnail((640, 640), Image.Resampling.LANCZOS)
+    image.save(public / 'art/syphon-light.webp', quality=94, method=6)
+    image.resize((64, 64), Image.Resampling.LANCZOS).save(public / 'art/favicon.png')
 
 
 def export_loop(folder, stem, max_width):
@@ -62,16 +67,19 @@ def export_loop(folder, stem, max_width):
 
 
 light_edition = artwork / 'workflow-light-concepts-2026-11-18'
-export_loop(light_edition / 'Frames/Plugin', 'plugin-light', 415)
-export_loop(light_edition / 'Frames/MIDI-Device', 'midi-light', 332)
-with TemporaryDirectory(prefix='syphon-audio-frames-') as work:
-    audio_frames = args.audio_frames
-    if audio_frames is None:
+sources = args.icon or list(loops)
+folders = {name: args.frames / name for name in sources} if args.frames else {}
+if args.audio_frames:
+    folders['Audio-File'] = args.audio_frames
+with TemporaryDirectory(prefix='syphon-source-frames-') as work:
+    missing = [name for name in sources if name not in folders]
+    if missing:
         subprocess.run([
             'blender', '--background', '--factory-startup', '--python-exit-code', '1',
-            '--python', str(site / 'scripts/audio-file-motion.py'),
+            '--python', str(site / 'scripts/source_motion.py'),
             '--python', str(light_edition / 'light_variants.py'),
-        ], env={**os.environ, 'ICONS': 'Audio-File', 'ANIM': '1', 'OUT': work,
+        ], env={**os.environ, 'ICONS': ','.join(missing), 'ANIM': '1', 'OUT': work,
                 'SIZE': '512', 'SAMPLES': '64'}, check=True)
-        audio_frames = Path(work) / 'Frames/Audio-File'
-    export_loop(audio_frames, 'audio-swirl', 382)
+        folders.update({name: Path(work) / 'Frames' / name for name in missing})
+    for name in sources:
+        export_loop(folders[name], *loops[name])
