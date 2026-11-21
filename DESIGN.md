@@ -6,12 +6,8 @@ Upright VC Henrietta, brown ink, warm paper and amber from the glass. The cover 
 
 ## Interaction
 
-The image itself opens a captioned dialog by click, tap or keyboard. Both the cover and the bottom of the page offer “Get Syphon for Mac”. Zoom in centers the relevant controls at a readable scale on phones and desktops. The Close button and Escape return focus to the originating screenshot. Each source icon loops while it is onscreen in a visible tab. Pause stops all three. Reduce Motion displays the approved stills.
+The image itself opens a captioned dialog by click, tap or keyboard. Both the cover and the bottom of the page offer “Get Syphon for Mac”. Zoom in centers the relevant controls at a readable scale on phones and desktops. The Close button and Escape return focus to the originating screenshot. Each source icon loops while it is onscreen in a visible tab. In Audio File, the amber drops and rises in sequence inside seven stationary glass capsules. Reduce Motion displays the still artwork.
 
 ## Support and Privacy
 
 Both pages use the booklet’s paper, upright Henrietta headings and system-font body copy. A thin rule separates each topic. On wider screens the heading sits beside the instructions. On phones it sits directly above them. The wordmark returns to the landing page and the footer marks the current page.
-
-## Design review
-
-The rendered detector flags the warm paper on the landing and availability pages. The brief specifies that paper colour. The source-only scan also flags the rule above each source caption. Computed styles give those captions 15 pixels of top padding on desktop and remove the rule on phones.

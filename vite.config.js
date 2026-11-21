@@ -30,6 +30,6 @@ export default defineConfig(({ mode }) => {
         }
       },
     }],
-    build: { rollupOptions: { input: ['index.html', 'booklet/index.html', 'download/index.html', 'support/index.html', 'privacy/index.html'] } },
+    build: { rollupOptions: { input: ['index.html', 'download/index.html', 'support/index.html', 'privacy/index.html'] } },
   }
 })

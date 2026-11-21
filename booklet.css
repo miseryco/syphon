@@ -29,10 +29,7 @@
 .cover-object { width: min(79%, 312px); justify-self: center; }
 .cover-object img { width: 100%; height: auto; filter: drop-shadow(5px 11px 8px rgb(75 49 23 / 17%)) drop-shadow(9px 24px 22px rgb(93 66 35 / 14%)); }
 .sources { padding: 1.55rem 0 2.6rem; border-top: 1px solid var(--rule); }
-.sources-heading { display: flex; align-items: center; justify-content: space-between; gap: .75rem; }
 .sources h2 { font-size: clamp(1.85rem, 2.8vw, 2.4rem); line-height: 1.16; letter-spacing: -.024em; }
-.motion-toggle { min-width: 44px; min-height: 44px; padding: .45rem .25rem; border: 0; background: transparent; color: var(--muted); font: 400 .85rem/1.4 system-ui, sans-serif; text-decoration: underline; text-underline-offset: .22em; }
-.motion-toggle:hover { color: var(--ink); }
 .tabletop { display: grid; grid-template-columns: 1.04fr 1fr .94fr; gap: 4%; padding: 0 1.5%; margin-top: .5rem; }
 .specimen { min-width: 0; }
 .object-space { height: clamp(142px, 14.7vw, 198px); display: flex; justify-content: center; align-items: center; }

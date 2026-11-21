@@ -85,30 +85,21 @@ for (const dialog of document.querySelectorAll('dialog')) {
 
 if ('IntersectionObserver' in window) {
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)')
-  const toggle = document.querySelector('.motion-toggle')
   const videos = document.querySelectorAll('video[data-loop]')
   const visible = new Set()
-  let paused = false
 
   function updateIcons() {
-    const playing = !paused && !document.hidden && !reducedMotion.matches
     for (const video of videos) {
       if (reducedMotion.matches) video.parentElement.classList.remove('has-frame')
-      if (!playing || !visible.has(video)) {
+      if (reducedMotion.matches || document.hidden || !visible.has(video)) {
         if (!video.paused) video.pause()
       } else if (video.paused && !video.error) {
         if (!video.hasAttribute('src')) video.src = video.dataset.loop
-        video.play().catch(error => {
-          if (error.name === 'NotAllowedError' && !document.hidden && visible.has(video)) {
-            paused = true
-            updateIcons()
-          }
+        video.play().catch(() => {
+          if (video.paused) video.parentElement.classList.remove('has-frame')
         })
       }
     }
-    toggle.hidden = reducedMotion.matches
-    toggle.textContent = paused ? 'Play' : 'Pause'
-    toggle.setAttribute('aria-label', paused ? 'Play icon animations' : 'Pause icon animations')
   }
 
   const observer = new IntersectionObserver(entries => {
@@ -128,11 +119,6 @@ if ('IntersectionObserver' in window) {
     video.addEventListener('error', () => art.classList.remove('has-frame'))
     observer.observe(video)
   }
-  toggle.addEventListener('click', () => {
-    paused = !paused
-    updateIcons()
-  })
   reducedMotion.addEventListener('change', updateIcons)
   document.addEventListener('visibilitychange', updateIcons)
-  updateIcons()
 }
