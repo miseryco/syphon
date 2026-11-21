@@ -69,4 +69,4 @@ with TemporaryDirectory(prefix='syphon-audio-frames-') as work:
         '--python', str(light_edition / 'light_variants.py'),
     ], env={**os.environ, 'ICONS': 'Audio-File', 'ANIM': '1', 'OUT': work,
             'SIZE': '512', 'SAMPLES': '64'}, check=True)
-    export_loop(Path(work) / 'Frames/Audio-File', 'audio-levels', 382)
+    export_loop(Path(work) / 'Frames/Audio-File', 'audio-glow', 382)
