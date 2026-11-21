@@ -24,7 +24,7 @@ Set `VITE_DOWNLOAD_URL` as a repository Actions variable when a direct Mac downl
 
 ## Refresh the artwork
 
-The site builds from the checked-in WebP images and silent MP4s. To refresh the icons, put Blender and FFmpeg with libx264 on your path. The script reads the light-edition artwork from the sibling `sample-syphon/` app checkout. Plugin and MIDI Device use the original frames. Audio File uses the same animated amber material, with its liquid surfaces fixed in place. Each WebP poster supplies the silhouette for its video.
+The site builds from the checked-in WebP images and silent MP4s. To refresh the icons, put Blender and FFmpeg with libx264 on your path. The script reads the light-edition artwork from the sibling `sample-syphon/` app checkout. Plugin and MIDI Device use the original frames. In Audio File, each fill has its own current and a small submerged bubble. Each WebP poster supplies the silhouette for its video. Use `--audio-frames /path/to/light/Frames/Audio-File` to encode the same frames as the native app.
 
 The variations and preset picker screenshots came from the running app. The loop screenshot shows its Output section with a processed Dexed C4 take. The originals live in the app checkout’s `build/site-features/` directory. Use `--artwork` and `--workspace` to point the respective scripts at other copies of their sources.
 

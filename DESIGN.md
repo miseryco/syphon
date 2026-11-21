@@ -6,7 +6,7 @@ Upright VC Henrietta, brown ink, warm paper and amber from the glass. The cover 
 
 ## Interaction
 
-The image itself opens a captioned dialog by click, tap or keyboard. Both the cover and the bottom of the page offer “Get Syphon for Mac”. Zoom in centers the relevant controls at a readable scale on phones and desktops. The Close button and Escape return focus to the originating screenshot. Each source icon loops while it is onscreen in a visible tab. In Audio File, soft highlights move through the amber. The seven capsules and their liquid levels stay still. Reduce Motion displays the still artwork.
+The image itself opens a captioned dialog by click, tap or keyboard. Both the cover and the bottom of the page offer “Get Syphon for Mac”. Zoom in centers the relevant controls at a readable scale on phones and desktops. The Close button and Escape return focus to the originating screenshot. Each source icon loops while it is onscreen in a visible tab. Each Audio File capsule has its own slow swirl and a small bubble that rises below the surface. The glass and liquid levels stay still. Reduce Motion displays the still artwork.
 
 ## Support and Privacy
 

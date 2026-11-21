@@ -10,7 +10,9 @@ from PIL import Image, ImageChops, ImageOps
 site = Path(__file__).resolve().parents[1]
 parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument('--artwork', type=Path, default=site.parent / 'sample-syphon/artwork')
-artwork = parser.parse_args().artwork
+parser.add_argument('--audio-frames', type=Path, help='reuse the light Audio File frames rendered for the app')
+args = parser.parse_args()
+artwork = args.artwork
 public = site / 'public'
 (public / 'art').mkdir(exist_ok=True)
 
@@ -63,10 +65,13 @@ light_edition = artwork / 'workflow-light-concepts-2026-11-18'
 export_loop(light_edition / 'Frames/Plugin', 'plugin-light', 415)
 export_loop(light_edition / 'Frames/MIDI-Device', 'midi-light', 332)
 with TemporaryDirectory(prefix='syphon-audio-frames-') as work:
-    subprocess.run([
-        'blender', '--background', '--factory-startup', '--python-exit-code', '1',
-        '--python', str(site / 'scripts/audio-file-motion.py'),
-        '--python', str(light_edition / 'light_variants.py'),
-    ], env={**os.environ, 'ICONS': 'Audio-File', 'ANIM': '1', 'OUT': work,
-            'SIZE': '512', 'SAMPLES': '64'}, check=True)
-    export_loop(Path(work) / 'Frames/Audio-File', 'audio-glow', 382)
+    audio_frames = args.audio_frames
+    if audio_frames is None:
+        subprocess.run([
+            'blender', '--background', '--factory-startup', '--python-exit-code', '1',
+            '--python', str(site / 'scripts/audio-file-motion.py'),
+            '--python', str(light_edition / 'light_variants.py'),
+        ], env={**os.environ, 'ICONS': 'Audio-File', 'ANIM': '1', 'OUT': work,
+                'SIZE': '512', 'SAMPLES': '64'}, check=True)
+        audio_frames = Path(work) / 'Frames/Audio-File'
+    export_loop(audio_frames, 'audio-swirl', 382)
