@@ -1,5 +1,4 @@
-"""Render a local current and submerged air pockets inside each Syphon glass vessel."""
-from bisect import bisect_right
+"""Render the local amber currents and the Audio File capsules' air bubbles."""
 from math import cos, sin, tau
 from pathlib import Path
 
@@ -64,7 +63,7 @@ def set_up_liquid(amber, swept):
         stop.color = (strength, strength, strength, 1)
 
 
-def air_material(catchlight):
+def air_material():
     material = bpy.data.materials.new('Air inside amber')
     material.use_nodes = True
     nodes = material.node_tree.nodes
@@ -90,7 +89,7 @@ def air_material(catchlight):
     ramp.elements[1].color = (1, 0.9, 0.72, 1)
     links.new(toward_light.outputs['Value'], glint.inputs['Fac'])
     reflection = nodes.new('ShaderNodeEmission')
-    reflection.inputs['Strength'].default_value = catchlight
+    reflection.inputs['Strength'].default_value = 2.4
     links.new(glint.outputs['Color'], reflection.inputs['Color'])
     surface = nodes.new('ShaderNodeAddShader')
     links.new(boundary.outputs[0], surface.inputs[0])
@@ -127,8 +126,7 @@ def animate_spin(scene, liquid, phase, direction):
 
 def key_bubble(bubble, frame, location, size):
     bubble.location = location
-    # The knob lens and connector collar inherit non-uniform scaling.
-    # Compensate so their submerged air pockets stay spherical.
+    # Express the radius in studio units, independent of the fill's scale.
     bubble.scale = tuple(size / axis for axis in bubble.parent.matrix_world.to_scale())
     bubble.keyframe_insert(data_path='scale', frame=frame)
     bubble.keyframe_insert(data_path='location', frame=frame)
@@ -158,7 +156,8 @@ def animate_capsule(scene, liquid, ring, air, phase, direction):
         key_bubble(bubble, frame, location, bubble_radius * envelope)
 
 
-def prepare_audio_file(scene, air):
+def prepare_audio_file(scene):
+    air = air_material()
     # Neighbours have different starting points and can circulate in opposite directions.
     currents = ((0.68, -1), (0.11, 1), (0.87, 1), (0.39, -1),
                 (0.04, 1), (0.55, -1), (0.26, 1))
@@ -180,7 +179,7 @@ def write_chart(mesh, coordinates):
     attribute.data.foreach_set('vector', coordinates)
 
 
-def chart_tube(liquid):
+def animate_tube(scene, liquid, phase, direction):
     # The original swept meshes have one ring of vertices per station and an
     # n-gon at each end. Opposite vertices give the centre even at crossings.
     mesh = liquid.data
@@ -199,31 +198,10 @@ def chart_tube(liquid):
     write_chart(mesh, [component for distance in distances for x, y in circle
                        for component in (x, y, distance / distances[-1])])
     liquid['swirl_scale'] = (1., 1., max(1., distances[-1] / (3 * radius)))
-    return centres, distances, radius
-
-
-def animate_tube(scene, liquid, air, phase, direction, bubbles):
-    centres, distances, radius = chart_tube(liquid)
     animate_spin(scene, liquid, phase, direction)
-    camera = liquid.matrix_world.inverted() @ scene.camera.matrix_world.translation
-    for index, (station, drift, bubble_phase) in enumerate(bubbles, 1):
-        bubble = new_bubble(liquid, air, f'{liquid.name} | bubble {index}')
-        for frame, turn, life, envelope in loop_frames(scene, bubble_phase):
-            # Drift a few radii along the bore and rise through its cross-section.
-            distance = station * distances[-1] + drift * radius * (life - 0.5)
-            i = bisect_right(distances, distance) - 1
-            step = centres[i + 1] - centres[i]
-            centre = centres[i] + step * ((distance - distances[i]) / step.length)
-            tangent = step.normalized()
-            up = Vector((0, 0, 1))
-            up = (up - tangent * up.dot(tangent)).normalized()
-            view = camera - centre
-            front = (view - tangent * view.dot(tangent)).normalized()
-            offset = up * (0.74 * (life - 0.48)) + front * (0.51 + 0.065 * sin(turn))
-            key_bubble(bubble, frame, centre + radius * offset, radius * 0.205 * envelope)
 
 
-def animate_pocket(scene, liquid, air, phase, direction):
+def animate_pocket(scene, liquid, phase, direction):
     # The knob inset and the collar are small, compact reservoirs. Their own
     # mesh bounds supply a chart in the same units as a tube cross-section.
     low = Vector(liquid.bound_box[0])
@@ -233,16 +211,6 @@ def animate_pocket(scene, liquid, air, phase, direction):
                               for v in liquid.data.vertices for i in range(3)])
     liquid['swirl_scale'] = (1., 1., 1.)
     animate_spin(scene, liquid, phase, direction)
-    bubble = new_bubble(liquid, air, f'{liquid.name} | bubble')
-    half = span * 0.5
-    mid = low + half
-    view = (liquid.matrix_world.inverted() @ scene.camera.matrix_world.translation - mid).normalized()
-    up = liquid.matrix_world.to_quaternion().inverted() @ Vector((0, 0, 1))
-    across = up.cross(view).normalized()
-    radius = min(half * liquid.matrix_world.to_scale()) * 0.27
-    for frame, turn, life, envelope in loop_frames(scene, phase):
-        offset = view * 0.50 + up * (0.72 * (life - 0.5)) + across * (0.10 * sin(turn))
-        key_bubble(bubble, frame, mid + half * offset, radius * envelope)
 
 
 @persistent
@@ -252,26 +220,22 @@ def prepare_source(_filepath):
         return
     scene = bpy.context.scene
     set_up_liquid(bpy.data.materials['Amber liquid | transmissive core'], swept=kind != 'Audio-File')
-    # The fully filled horizontal tubes and cable have a stronger studio stripe
-    # over the liquid. Their small air surfaces need a little more reflected light.
-    air = air_material(2.4 if kind == 'Audio-File' else 7.0)
     if kind == 'Audio-File':
-        prepare_audio_file(scene, air)
+        prepare_audio_file(scene)
     elif kind == 'Plugin':
         lower = scene.objects['Horizontal tube 1.08 | amber liquid']
         upper = scene.objects['Horizontal tube 1.92 | amber liquid']
         lens = scene.objects['Knob amber inset']
         lower.pass_index, upper.pass_index, lens.pass_index = 2, 4, 7
-        animate_tube(scene, lower, air, 0.64, -1, [(0.63, -1.7, 0.64)])
-        animate_tube(scene, upper, air, 0.13, 1, [(0.37, 2.0, 0.13)])
-        animate_pocket(scene, lens, air, 0.43, -1)
+        animate_tube(scene, lower, 0.64, -1)
+        animate_tube(scene, upper, 0.13, 1)
+        animate_pocket(scene, lens, 0.43, -1)
     else:
         cable = scene.objects['Cable | separate amber core']
         collar = scene.objects['Rear collar liquid']
         cable.pass_index, collar.pass_index = 3, 6
-        animate_tube(scene, cable, air, 0.33, -1,
-                     [(0.15, -1.9, 0.68), (0.46, 2.1, 0.10), (0.78, -1.6, 0.39)])
-        animate_pocket(scene, collar, air, 0.83, 1)
+        animate_tube(scene, cable, 0.33, -1)
+        animate_pocket(scene, collar, 0.83, 1)
     scene.frame_set(scene.frame_start)
 
 
